@@ -7,14 +7,35 @@ class TagsTableSeeder extends Seeder {
 
 	public function run()
 	{
-		$faker = Faker::create();
+		DB::table('tags')->delete();
 
-		foreach(range(1, 10) as $index)
-		{
-			Tag::create([
+		DB::table('tags')->insert([
+			[
+				"name"=>"php"
+			],
+			[
+				"name"=>"AngularJS"
+			],
+			[
+				"name"=>"AngularJS/Laravel"
+			],
+			[
+				"name"=>"Fabric"
+			],
+			[
+				"name"=>"PHPUnit"
+			],
+			[
+				"name"=>"Behat"
+			],
+			[
+				"name"=>"Travis"
+			],
+			[
+				"name"=>"Gulp"
+			],
 
-			]);
-		}
+		]);
 	}
 
 }
