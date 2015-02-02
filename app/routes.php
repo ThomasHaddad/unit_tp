@@ -11,7 +11,14 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', array('uses'=>'HomeController@index'));
+
+
+Route::get('login', array('uses' => 'HomeController@showLogin'));
+Route::post('login', array('uses' => 'HomeController@doLogin'));
+Route::get('logout', array('uses' => 'HomeController@doLogout'));
+
+
+//Route::get('create',array('before'=>'auth','uses'=>'AperoController@index'));
+Route::get('create', ['before'=>'auth', 'as'=>'create', 'uses'=>'AperoController@index']);
+Route::post('postCreate',array('before'=>'auth','uses'=>'AperoController@postCreate'));

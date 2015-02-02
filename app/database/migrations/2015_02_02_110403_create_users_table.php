@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration {
 			$table->string('password');
 			$table->enum('role',array('visitor','admin'))->default('visitor');
 			$table->enum('status',array('online','offline'))->default('offline');
+			$table->string('remember_token',100);
 			$table->timestamps();
 		});
 	}

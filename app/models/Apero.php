@@ -7,7 +7,12 @@
  */
 
 class Apero extends Eloquent{
+
     public function tag(){
         return $this->belongsTo('Tag');
+    }
+
+    public function user(){
+        return $this->belongsTo('User');
     }
 }

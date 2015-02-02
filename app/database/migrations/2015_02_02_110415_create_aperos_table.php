@@ -36,8 +36,11 @@ class CreateAperosTable extends Migration {
 	 */
 	public function down()
 	{
-		$table->dropForeign('aperos_user_id_foreign');
-		$table->dropForeign('aperos_tag_id_foreign');
+		Schema::table('aperos', function($table) {
+			$table->dropForeign('aperos_user_id_foreign');
+			$table->dropForeign('aperos_tag_id_foreign');
+
+		});
 		Schema::drop('aperos');
 	}
 

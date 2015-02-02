@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'default'=>'mysql',
+    'default'=>'testing',
     'connections'=>[
         'host'=>getenv('DB_HOST'),
         'database'  => getenv('DB_NAME'),
