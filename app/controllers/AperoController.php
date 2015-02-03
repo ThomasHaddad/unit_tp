@@ -33,14 +33,16 @@ class AperoController extends BaseController{
         if(Input::hasfile('file')){
             $apero->url_thumbnail=$this->uploadImage();
         }
-        if(!Tag::findOrFail($input['tag'])){
-            return Redirect::back();
-        }
         $apero->tag_id=intval($input['tag']);
+
+        $tag= Tag::findOrFail(intval($input['tag']));
+        $tag->count_apero=$tag->count_apero+1;
+        $tag->save();
 
         $apero->status='published';
 
         $apero->save();
+
 
         return Redirect::to('create')
             ->withMessage('success');

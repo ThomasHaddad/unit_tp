@@ -38,7 +38,6 @@ class AperoTest extends TestCase{
         $inputs=[
             'title'=>'titre',
             'content'=>'bla',
-            'user_id'=>5,
             'date'=>'28-02-2015',
             'tag'=>'5',
         ];
@@ -56,6 +55,19 @@ class AperoTest extends TestCase{
         $this->assertRedirectedToRoute('create');
         $this->assertSessionHasErrors(['title','content','date']);
     }
-
+    public function testAutoIncrementTag(){
+        Auth::attempt($this->userData, false);
+        $inputs=[
+            'title'=>'titre',
+            'content'=>'bla',
+            'date'=>'28-02-2015',
+            'tag'=>'5',
+        ];
+        $tag=Tag::findOrFail(5);
+        $this->assertEquals(0, $tag->count_apero);
+        $this->call('POST', 'postCreate', $inputs);
+        $tag=Tag::findOrFail(5);
+        $this->assertEquals(1,$tag->count_apero);
+    }
 }
 
