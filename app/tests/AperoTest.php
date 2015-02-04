@@ -10,6 +10,7 @@ class AperoTest extends TestCase{
 
     protected $mock;
     protected $userData;
+
     public function setUp() {
         parent::setup();
         Artisan::call('migrate');
@@ -17,11 +18,31 @@ class AperoTest extends TestCase{
         $this->mock=Mockery::mock('Eloquent', 'Apero');
         $this->userData=['username'=>'Al', 'password'=>'al'];
     }
+
     public function tearDown() {
         parent::tearDown();
         Artisan::call('migrate:reset');
         Mockery::close();
     }
+
+    /**
+     * @test check if tags auto increments when apero is saved
+     */
+    public function testAutoIncrementTag(){
+        Auth::attempt($this->userData, false);
+        $inputs=[
+            'title'=>'titre',
+            'content'=>'bla',
+            'date'=>'28-02-2015',
+            'tag'=>'5',
+        ];
+        $tag=Tag::findOrFail(5);
+        $this->assertEquals(0, $tag->count_apero);
+        $this->call('POST', 'postCreate', $inputs);
+        $tag=Tag::findOrFail(5);
+        $this->assertEquals(1,$tag->count_apero);
+    }
+
     /**
      * @test retrieve all aperos on homepage
      */
@@ -30,6 +51,7 @@ class AperoTest extends TestCase{
         $this->app->instance('Apero', $this->mock);
         $this->call('GET', '/');
     }
+
     /**
      * @test create a new apero
      */
@@ -45,6 +67,7 @@ class AperoTest extends TestCase{
         $this->call('POST', 'postCreate',$inputs);
         $this->assertRedirectedToRoute('create',null,['message'=>'success']);
     }
+
     /**
      * @test missing fields during creation of an apero
      */
@@ -55,19 +78,7 @@ class AperoTest extends TestCase{
         $this->assertRedirectedToRoute('create');
         $this->assertSessionHasErrors(['title','content','date']);
     }
-    public function testAutoIncrementTag(){
-        Auth::attempt($this->userData, false);
-        $inputs=[
-            'title'=>'titre',
-            'content'=>'bla',
-            'date'=>'28-02-2015',
-            'tag'=>'5',
-        ];
-        $tag=Tag::findOrFail(5);
-        $this->assertEquals(0, $tag->count_apero);
-        $this->call('POST', 'postCreate', $inputs);
-        $tag=Tag::findOrFail(5);
-        $this->assertEquals(1,$tag->count_apero);
-    }
+
+
 }
 

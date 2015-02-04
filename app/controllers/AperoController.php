@@ -9,6 +9,7 @@
 class AperoController extends BaseController{
 
 
+
     public function index(){
         $tags = Tag::lists('name');
         return View::make('apero',compact('tags'));
@@ -35,14 +36,9 @@ class AperoController extends BaseController{
         }
         $apero->tag_id=intval($input['tag']);
 
-        $tag= Tag::findOrFail(intval($input['tag']));
-        $tag->count_apero=$tag->count_apero+1;
-        $tag->save();
-
         $apero->status='published';
 
         $apero->save();
-
 
         return Redirect::to('create')
             ->withMessage('success');
@@ -52,10 +48,12 @@ class AperoController extends BaseController{
             $file = Input::file('file');
             $files = [$file];
             $rules = ['image' => 'image|mime:jpg,png,gif, jpeg|max:3000'];
+
             $validator = Validator::make($files, $rules);
             if($validator->fails()){
                 return Redirect::back();
             }
+
             $fileExtension = $file->getClientOriginalExtension();
             $destinationPath = 'public/uploads/';
             $filename = substr(md5(rand()),0,10) . '.' . $fileExtension;

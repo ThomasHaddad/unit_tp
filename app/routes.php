@@ -22,3 +22,9 @@ Route::get('logout', array('uses' => 'HomeController@doLogout'));
 //Route::get('create',array('before'=>'auth','uses'=>'AperoController@index'));
 Route::get('create', ['before'=>'auth', 'as'=>'create', 'uses'=>'AperoController@index']);
 Route::post('postCreate',array('before'=>'auth','uses'=>'AperoController@postCreate'));
+
+//Route::get('test', function(){
+//
+//    dd(Apero::find(1)->tag());
+//
+//});
