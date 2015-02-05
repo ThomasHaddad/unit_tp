@@ -9,7 +9,7 @@ env:
   - SYMFONY_VERSION='2.2.*@dev'
 before_script:
   - sudo apt-get update > /dev/null
-  - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl php-ssl
+  - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl
   - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
   - sudo /etc/init.d/apache2 restart
   - sudo sed -i -e "/DocumentRoot/i\ServerName knpu_qa.l" /etc/apache2/sites-available/default
