@@ -20,7 +20,6 @@ class AuthTest extends TestCase{
      */
     public function testDoSuccessfullogin(){
         Auth::shouldReceive('attempt')->once()->andReturn('true');
-
         $this->call('POST', 'login', $this->userData);
     }
 
@@ -29,7 +28,6 @@ class AuthTest extends TestCase{
      */
     public function testFailLogin(){
         Auth::shouldReceive('attempt')->once()->andReturn('false');
-
         $this->call('POST', 'login', ['username'=>'a', 'password'=>'b']);
     }
 
@@ -46,7 +44,6 @@ class AuthTest extends TestCase{
      */
     public function testDologout(){
         Auth::shouldReceive('logout')->once()->andReturn('true');
-
         $this->call('GET', 'logout');
     }
 }

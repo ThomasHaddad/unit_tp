@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', array('uses'=>'HomeController@index'));
+Route::get('/', array('as'=>'home','uses'=>'HomeController@index'));
 
 
-Route::get('login', array('uses' => 'AuthController@showLogin'));
+Route::get('login', array('as'=>'login','uses' => 'AuthController@showLogin'));
 Route::post('login', array('uses' => 'AuthController@doLogin'));
 Route::get('logout', array('before'=>'auth','uses' => 'AuthController@doLogout'));
 
