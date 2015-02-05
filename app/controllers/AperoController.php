@@ -9,7 +9,9 @@
 class AperoController extends BaseController{
 
 
-
+    /**
+     * @return mixed
+     */
     public function index(){
         $tags=[];
         foreach(Tag::all() as $tag){
@@ -18,6 +20,10 @@ class AperoController extends BaseController{
         return View::make('apero',compact('tags'));
     }
 
+    /**
+     * @return mixed
+     * Apero creation
+     */
     public function postCreate(){
         $input=Input::all();
         $v=Validator::make($input, ['title' => 'required', 'date'=>'required','content'=>'required']);
@@ -47,6 +53,10 @@ class AperoController extends BaseController{
             ->withMessage('success');
     }
 
+    /**
+     * @return string
+     * Save the image on the server
+     */
     public function uploadImage(){
         if(Input::hasfile('file')) {
             $file = Input::file('file');

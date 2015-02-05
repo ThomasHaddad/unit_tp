@@ -17,18 +17,29 @@ class HomeController extends BaseController {
 	|	Route::get('/', 'HomeController@showWelcome');
 	|
 	*/
-
+	/**
+	 * @return mixed
+	 * retrieves all the aperos
+	 */
 	public function index()
 	{
 		$aperos=$this->aperos->all();
 		return View::make('home',compact('aperos'));
 	}
+
+	/**
+	 * @return mixed
+	 */
 	public function showLogin()
 	{
 		// show the form
 		return View::make('login');
 	}
 
+	/**
+	 * @return mixed
+	 * Login validation
+	 */
 	public function doLogin()
 	{
 		$rules = array(
@@ -64,6 +75,11 @@ class HomeController extends BaseController {
 
 		}
 	}
+
+	/**
+	 * @return mixed
+	 * Logout
+	 */
 	public function doLogout()
 	{
 		Auth::logout();
