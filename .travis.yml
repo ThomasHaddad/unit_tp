@@ -5,6 +5,6 @@ php:
 before_script:
   - composer self-update
   - composer install
-  - "mysql -utravis -e 'create database if not exists laraveltesting'`;'"
+  - "mysql -utravis -e 'create database if not exists `laraveltesting`';'"
 script:
   - vendor/bin/phpunit
