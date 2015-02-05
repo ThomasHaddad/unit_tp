@@ -58,7 +58,7 @@ class HomeController extends BaseController {
 
 			} else {
 
-				return Redirect::to('login');
+				return Redirect::to('login')->withFlashMessage('error');
 
 			}
 

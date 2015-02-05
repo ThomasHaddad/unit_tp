@@ -5,9 +5,9 @@
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
 </head>
 <body>
-
 {{Form::open(['url'=>'postCreate', 'files'=>true, 'method'=>'POST'])}}
 <h1>Créer un apéro</h1>
+<p>{{Session::get('message')}}</p>
 <p>
     {{ $errors->first('title') }}
     {{ $errors->first('content') }}

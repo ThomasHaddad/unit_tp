@@ -11,7 +11,10 @@ class AperoController extends BaseController{
 
 
     public function index(){
-        $tags = Tag::lists('name');
+        $tags=[];
+        foreach(Tag::all() as $tag){
+            $tags[$tag->id]=$tag->name;
+        }
         return View::make('apero',compact('tags'));
     }
 
@@ -43,6 +46,7 @@ class AperoController extends BaseController{
         return Redirect::to('create')
             ->withMessage('success');
     }
+
     public function uploadImage(){
         if(Input::hasfile('file')) {
             $file = Input::file('file');
