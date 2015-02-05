@@ -8,13 +8,11 @@ services: mysql
 
 before_script:
   - composer self-update
-  - composer install
+  - composer install --prefer-source --no-interaction
   - "mysql -utravis -e 'create database if not exists `laraveltesting_test`;'"
-  - php artisan migrate --force
-  - php artisan db:seed --force
   - php artisan serve &
   - sleep 5
 
 script:
+  - vendor/bin/phpunit
   - vendor/bin/behat
-  #- vendor/bin/phpunit
