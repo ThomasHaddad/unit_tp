@@ -1,17 +1,15 @@
 language: php
+
 php:
+  - 5.4
   - 5.6
-  - hhvm
 
 services: mysql
 
 before_script:
-  # installation
   - composer self-update
-  - composer install --dev --prefer-source --no-interaction
-  # database configuration
-  - mysql -e 'create database cc_testing;'
-  # startup server environment
+  - composer install --dev --prefer-dist
+  - "mysql -utravis -e 'create database if not exists `laraveltesting_test`;'"
   - php artisan migrate:install
   - php artisan migrate
   - php artisan migrate:install --env=”testing”
@@ -19,5 +17,5 @@ before_script:
   - sleep 5
 
 script:
-  - phpunit
+  - vendor/bin/phpunit
   - vendor/bin/behat
