@@ -26,24 +26,6 @@ class AperoTest extends TestCase{
     }
 
     /**
-     * @test check if tags auto increments when apero is saved
-     */
-    public function testAutoIncrementTag(){
-        Auth::attempt($this->userData, false);
-        $inputs=[
-            'title'=>'titre',
-            'content'=>'bla',
-            'date'=>'28-02-2015',
-            'tag'=>'5',
-        ];
-        $tag=Tag::findOrFail(5);
-        $this->assertEquals(0, $tag->count_apero);
-        $this->call('POST', 'postCreate', $inputs);
-        $tag=Tag::findOrFail(5);
-        $this->assertEquals(1,$tag->count_apero);
-    }
-
-    /**
      * @test retrieve all aperos on homepage
      */
     public function testHomeAperosDataView() {
